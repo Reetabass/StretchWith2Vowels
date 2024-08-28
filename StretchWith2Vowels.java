@@ -24,44 +24,48 @@ public class StretchWith2Vowels {
 
     }
 
-
     public static String readSentence() {
         System.out.print("Sentence: ");
         String input = In.nextLine();
         return input;
     }
 
-    public static int countVowel(String input) {
-        /* Loop to read the word from z to z and then initialize the counter
-         * to count the number of vowels in the word. */
 
+    public static int splitterCount(String input) {
+        
         int count = 0;
+        String[] words = input.split(" ");
+        
+        for (int i = 0; i < words.length; i++) {
+            
+            String[] stretch = words[i].split("z");
 
-        for (int i = 0; i < input.length(); i++) {
-            if (isVowel(input.charAt(i))) {
-                count++;
+            for (int j = 0; j < stretch.length; j++) {
+
+                if (is2CountVowel(stretch[j])){
+                    count++;
+                    break;
+                }
+
             }
         }
+
         return count;
 
-
-           
     }
-    public static String[] splitString(String input) {
-        String[] words = input.split("z");
-        return words;
-    }
+    
     public static void runner() {
         
         String input = readSentence();
         
         while (!input.equals("*")) {
-            int[] countArray = new int[input.length()];
-            String[] words = splitString(input);
-            for (int i = 0; i < words.length; i++) {  
-                countArray[i] = countVowel(words[i]);
-            }
-            System.out.println("Matching words: " + numCountMatch(countArray));
+            
+            int count = 0;
+            
+            count = splitterCount(input);
+
+            System.out.println("Matching Words = " + count);
+
             input = readSentence();
         }
 
@@ -72,14 +76,18 @@ public class StretchWith2Vowels {
         return "aeiou".contains ("" + a);
     }
 
-    public static int numCountMatch(int[] countArray) {
+    public static boolean is2CountVowel(String input) {
+        
         int count = 0;
-        for (int i = 0; i < countArray.length; i++) {
-            if (countArray[i] == 2) {
+        for (int i = 0; i < input.length(); i++) {
+            if (isVowel(input.charAt(i))) {
                 count++;
             }
         }
-        return count;
+        return count == 2;
+        
+        
     }
-    
+
+
 }
