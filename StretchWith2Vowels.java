@@ -53,9 +53,7 @@ public class StretchWith2Vowels {
 
             }
 
-            if (!hasStretch && is2CountVowel(words[i])) {
-                hasStretch = true;
-            }
+           
 
             if (hasStretch) {
                 count++;
