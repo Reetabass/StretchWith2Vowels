@@ -33,20 +33,32 @@ public class StretchWith2Vowels {
 
     public static int splitterCount(String input) {
         
+        input = input.toLowerCase();
         int count = 0;
         String[] words = input.split(" ");
         
-        for (int i = 0; i < words.length; i++) {
+        for (int i = 0; i < words.length; i++ ) {
             
             String[] stretch = words[i].split("z");
+            
 
+            boolean hasStretch = false;
+            
             for (int j = 0; j < stretch.length; j++) {
-
+                
                 if (is2CountVowel(stretch[j])){
-                    count++;
+                    hasStretch = true;
                     break;
                 }
 
+            }
+
+            if (!hasStretch && is2CountVowel(words[i])) {
+                hasStretch = true;
+            }
+
+            if (hasStretch) {
+                count++;
             }
         }
 
